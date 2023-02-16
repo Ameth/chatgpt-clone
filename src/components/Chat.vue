@@ -1,5 +1,6 @@
 <script setup>
-import Avatar from '@/components/Avatar.vue'
+import Mensaje from '@/components/Mensaje.vue'
+import ChatForm from '@/components/ChatForm.vue'
 
 const messages = [{
     id: 1,
@@ -8,21 +9,21 @@ const messages = [{
 }, {
     id: 2,
     ia: true,
-    message: 'Al igual que ocurren con otras leyes de termodinámica, el segundo principio es de tipo empírico, llegamos a él a través de la experimentación. La termodinámica no se preocupa de demostrar por qué las cosas son así, y no de otra forma.'
+    message: `Sí, en teoría es posible conectar el dispositivo de control biométrico Anviz GC150 a través de una dirección IP pública para leer los registros de forma remota. Sin embargo, hay varias consideraciones importantes que debe tener en cuenta antes de hacerlo.
+
+En primer lugar, debe asegurarse de que el dispositivo esté configurado correctamente para permitir el acceso remoto y de que tenga una dirección IP pública asignada.Si no está seguro de cómo hacerlo, puede consultar el manual de usuario del dispositivo o contactar al fabricante para obtener ayuda.
+
+En segundo lugar, debe tener en cuenta la seguridad de la conexión remota.El acceso remoto a un dispositivo a través de una dirección IP pública puede ser vulnerable a ataques y puede comprometer la seguridad de los datos almacenados en el dispositivo.Por lo tanto, es importante implementar medidas de seguridad adecuadas, como usar una conexión cifrada(por ejemplo, mediante el protocolo HTTPS), establecer contraseñas seguras y cambiarlas regularmente, y limitar el acceso remoto solo a usuarios autorizados.
+
+En resumen, es posible conectar el dispositivo de control biométrico Anviz GC150 a través de una dirección IP pública para leer los registros de forma remota, pero es importante asegurarse de que esté configurado correctamente y de implementar medidas de seguridad adecuadas para proteger los datos.`
 }]
 </script>
 
 <template>
     <div class="flex flex-col h-full flex-1 pl-64">
         <main>
-            <div v-for="message in messages" :key="message.id" :class="[message.ia ? 'bg-gptlightgray' : 'bg-gptgray']">
-                <article class="flex gap-4 p-4 m-auto max-w-3xl">
-                    <Avatar>
-                        <img src="https://avatars.githubusercontent.com/u/1568292?v=4" alt="Foto de Ameth">
-                    </Avatar>
-                    <p>{{ message.message }}</p>
-                </article>
-            </div>
+            <Mensaje :messages="messages" />
         </main>
+        <ChatForm />
     </div>
 </template>
