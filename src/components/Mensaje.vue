@@ -1,4 +1,5 @@
 <script setup>
+import snarkdown from 'snarkdown'
 import Avatar from '@/components/Avatar.vue'
 import { ChatGPTLogo } from '@/components/Icons.jsx'
 import TypingEffect from '@/components/TypingEffect.vue'
@@ -18,7 +19,7 @@ defineProps({
             <div className='min-h-[20px] flex flex-1 flex-col items-start gap-4 whitespace-pre-wrap'>
                 <div className='prose-invert w-full break-words'>
                     <p>
-                        <TypingEffect :text="message.message" :ia="message.ia" />
+                            <TypingEffect :text="snarkdown(message.message)" :ia="message.ia" />
                     </p>
                 </div>
             </div>

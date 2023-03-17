@@ -1,10 +1,20 @@
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
+import { computed, reactive, ref } from 'vue'
 import apiOpenAI from '@/api'
 import { clearText } from '@/utils'
 
 export const useMessageStore = defineStore('message', () => {
   const messages = ref([])
+  const isLoading = ref(false)
+  const conversationsMessages = reactive({})
+  const conversationsInfo = reactive({})
+  const selectedConversation = ref(null)
+
+  const selectConversation = computed(() => {
+    return ({ id }) => {
+      selectedConversation.value = id
+    }
+  })
 
   const sendPrompt = async ({ prompt }) => {
     const messageIAId = messages.value.length + 1
@@ -55,5 +65,13 @@ export const useMessageStore = defineStore('message', () => {
     }
   }
 
-  return { messages, sendPrompt }
+  return {
+    messages,
+    isLoading,
+    conversationsMessages,
+    conversationsInfo,
+    selectedConversation,
+    selectConversation,
+    sendPrompt
+  }
 })
