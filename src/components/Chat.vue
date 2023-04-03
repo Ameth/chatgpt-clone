@@ -2,8 +2,8 @@
 import { ref } from 'vue'
 import Mensaje from '@/components/Mensaje.vue'
 import ChatForm from '@/components/ChatForm.vue'
-import { useMessageStore } from '@/store/messages'
 import Welcome from './Welcome.vue'
+import { useMessageStore } from '@/store/messages'
 import { storeToRefs } from 'pinia'
 
 const messageStore = useMessageStore()
