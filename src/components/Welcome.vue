@@ -1,5 +1,12 @@
 <script setup>
 import { SunIcon, VueIcon, GitHubIcon, TailwindLogo } from './Icons'
+import { useMessageStore } from '@/store/messages'
+import { storeToRefs } from "pinia"
+
+const messageStore = useMessageStore()
+
+const { isLoading, startChat } = storeToRefs(messageStore)
+const { sendPrompt } = messageStore
 
 const EXAMPLES = [
     '¿Cómo iterar un array en JavaScript?',
@@ -7,8 +14,11 @@ const EXAMPLES = [
     '¿Por qué se dice que un gato tiene 7 vidas?'
 ]
 
-const sendPrompt = ({ promt }) => {
-    console.log(promt)
+const sendExample = ({ prompt }) => {
+    // console.log(prompt)
+    isLoading.value = true
+    startChat.value = true
+    sendPrompt({ prompt })
 }
 
 </script>
@@ -40,7 +50,7 @@ const sendPrompt = ({ promt }) => {
             </h3>
 
             <ul className='flex flex-col gap-3.5 w-full sm:max-w-md m-auto'>
-                <button v-for="(item, index) in EXAMPLES" :key="index" @click="sendPrompt({ promt: item })"
+                                            <button v-for="(item, index) in EXAMPLES" :key="index" @click="sendExample({ prompt: item })"
                     class='w-full p-3 rounded-md bg-gray-50 dark:bg-white/5 hover:bg-gray-200 dark:hover:bg-gray-900'>
                     {{ item }} →
                 </button>

@@ -1,13 +1,13 @@
 <script setup>
 import { ref } from 'vue'
 import { SendIcon } from '@/components/Icons.jsx'
-import { useMessageStore } from '@/store/messages'
 import LoadingButton from './LoadingButton.vue'
+import { useMessageStore } from '@/store/messages'
 import { storeToRefs } from "pinia"
 
 const messageStore = useMessageStore()
 
-const { isLoading } = storeToRefs(messageStore)
+const { isLoading, startChat } = storeToRefs(messageStore)
 const { sendPrompt } = messageStore
 
 const newText = ref("")
@@ -17,6 +17,7 @@ const handleSubmit = (event) => {
     event?.preventDefault()
     if (newText.value !== "") {
         isLoading.value = true
+        startChat.value = true
         sendPrompt({ prompt: newText.value })
         newText.value = ""
         textArea.value.style.height = '24px'

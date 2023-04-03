@@ -1,4 +1,10 @@
+import { useMessageStore } from '@/store/messages'
+import { storeToRefs } from 'pinia'
+
 export default async function apiOpenAI({ prompt }) {
+  const messageStore = useMessageStore()
+
+  const { isLoading } = storeToRefs(messageStore)
   try {
     const response = await fetch('https://api.openai.com/v1/completions', {
       method: 'POST',
@@ -34,6 +40,7 @@ export default async function apiOpenAI({ prompt }) {
 
     const data = { response: json.choices[0].text }
 
+    isLoading.value = false
     return data
   } catch (e) {
     console.error(e)

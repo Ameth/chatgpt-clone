@@ -6,6 +6,7 @@ import { clearText } from '@/utils'
 export const useMessageStore = defineStore('message', () => {
   const messages = ref([])
   const isLoading = ref(false)
+  const startChat = ref(false)
   const conversationsMessages = reactive({})
   const conversationsInfo = reactive({})
   const selectedConversation = ref(null)
@@ -17,6 +18,7 @@ export const useMessageStore = defineStore('message', () => {
   })
 
   const sendPrompt = async ({ prompt }) => {
+    // console.log('Desde el store:', prompt)
     const messageIAId = messages.value.length + 1
 
     // actualizar el estado de los mensajes
@@ -40,7 +42,6 @@ export const useMessageStore = defineStore('message', () => {
 
     try {
       const json = await apiOpenAI({ prompt })
-
       //   console.log('Respuesta desde api:', json.response)
 
       //   messages.value[1].message = json.response
@@ -68,6 +69,7 @@ export const useMessageStore = defineStore('message', () => {
   return {
     messages,
     isLoading,
+    startChat,
     conversationsMessages,
     conversationsInfo,
     selectedConversation,

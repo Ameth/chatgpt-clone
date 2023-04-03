@@ -8,7 +8,7 @@ import { storeToRefs } from 'pinia'
 
 const messageStore = useMessageStore()
 
-const { messages, selectedConversation } = storeToRefs(messageStore)
+const { messages, selectedConversation, startChat } = storeToRefs(messageStore)
 
 // const valid = ref(false)
 </script>
@@ -16,7 +16,7 @@ const { messages, selectedConversation } = storeToRefs(messageStore)
 <template>
     <div class="flex flex-col h-full flex-1 pl-64">
         <main class="relative w-full">
-                <div v-if="selectedConversation" className="flex-1 overflow-hidden">
+                    <div v-if="startChat" className="flex-1 overflow-hidden">
                     <div className="h-full overflow-auto">
                         <Mensaje :messages="messages" />
                         <div className="flex-shrink-0 w-full h-32 md:h-48 bg-gptgray" />
